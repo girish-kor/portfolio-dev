@@ -5,7 +5,7 @@ Passionate about building interactive and efficient web experiences with modern 
 
 ## Demo
 
-**Live Demo**: [https://web-shop-hu5w.onrender.com/](https://web-shop-hu5w.onrender.com/)
+**Live Demo**: [https://portfolio-dev-1fp4.onrender.com/](https://portfolio-dev-1fp4.onrender.com/)
 **GitHub Repository**: [https://github.com/girish-kor/web-shop](https://github.com/girish-kor/web-shop)
 
 ---
