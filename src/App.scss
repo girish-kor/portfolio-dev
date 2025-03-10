@@ -1,0 +1,25 @@
+@use './styles/variables' as *;
+@use './styles/mixins' as *;
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: url('./assets/background-image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--primary-text-color);
+  font-family: var(--main-font);
+  user-select: none;
+  overflow-x: hidden;
+
+  // Smooth scrolling effect for navigation
+  scroll-behavior: smooth;
+
+  // Mobile responsiveness improvement
+  @media (max-width: 768px) {
+    background-attachment: scroll;
+  }
+}

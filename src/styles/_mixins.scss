@@ -1,0 +1,59 @@
+// _mixins.scss
+@use './variables' as *;
+
+/* Flex Center */
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Glass Card */
+@mixin glass-card {
+  background: var(--glass-bg-color);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px var(--shadow-color);
+  padding: var(--spacing-lg);
+  transition: all 0.4s ease;
+}
+
+/* Gradient Text */
+@mixin gradient-text($color1, $color2) {
+  background: linear-gradient(90deg, $color1, $color2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hover Card */
+@mixin hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 40px var(--shadow-color);
+  }
+}
+
+/* Responsive Typography */
+@mixin responsive-text($min, $max) {
+  font-size: clamp($min, 5vw, $max);
+}
+
+/* Fade Slide Up Animation */
+@mixin fade-slide-up($duration: 0.7s, $distance: 30px, $delay: 0s) {
+  --slide-distance: #{$distance};
+  animation: fadeSlideUp var(--fade-duration, #{$duration}) ease-out var(--fade-delay, #{$delay})
+    both;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(var(--slide-distance));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

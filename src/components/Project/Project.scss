@@ -1,0 +1,143 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.project-section {
+  @include glass-card;
+  max-width: 1100px;
+  margin: var(--spacing-lg) auto;
+  padding: var(--spacing-md);
+  text-align: center;
+  @include fade-slide-up(0.6s, 20px);
+  backdrop-filter: blur(12px);
+
+  h2 {
+    @include responsive-text(1.8rem, 2.5rem);
+    margin-bottom: var(--spacing-lg);
+    @include gradient-text(var(--primary-color), var(--accent-color));
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  .project-card {
+    @include glass-card;
+    @include hover-card;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    min-height: 320px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: all 0.3s ease;
+
+    h3 {
+      font-size: 1.3rem;
+      color: var(--primary-color);
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: var(--secondary-text-color);
+      line-height: 1.5;
+      min-height: 50px;
+    }
+
+    .repo-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xs);
+      justify-content: flex-start;
+      margin-top: auto;
+      padding-top: var(--spacing-sm);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.85rem;
+        color: var(--primary-text-color);
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2px 6px;
+        border-radius: var(--radius-xs);
+        transition: background 0.3s ease;
+
+        svg {
+          font-size: 0.75rem;
+        }
+
+        &:hover {
+          background: var(--accent-color);
+          color: var(--dark-color);
+        }
+      }
+    }
+
+    .project-links {
+      display: flex;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-sm);
+
+      a {
+        @include flex-center;
+        gap: var(--spacing-xs);
+        text-decoration: none;
+        color: var(--primary-text-color);
+        padding: 6px 12px;
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.1);
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: var(--accent-color);
+          color: var(--dark-color);
+          box-shadow: 0 6px 12px var(--shadow-color);
+          transform: translateY(-3px);
+        }
+
+        svg {
+          font-size: 0.85rem;
+        }
+      }
+    }
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px var(--shadow-color);
+    }
+  }
+
+  // Mobile adjustments
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm);
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    .projects-grid {
+      gap: var(--spacing-sm);
+    }
+  }
+
+  @media (max-width: 480px) {
+    h2 {
+      font-size: 1.6rem;
+    }
+
+    .project-card {
+      padding: var(--spacing-sm);
+
+      p {
+        min-height: auto;
+      }
+    }
+  }
+}

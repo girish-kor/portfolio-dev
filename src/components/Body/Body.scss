@@ -1,0 +1,26 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.body-container {
+  @include flex-center;
+  flex-direction: column;
+  padding: var(--spacing-md);
+  gap: var(--spacing-md);
+  flex-grow: 1;
+  width: 100%;
+  margin: 0 auto;
+
+  .animated-section {
+    width: 100%;
+    @include fade-slide-up(0.5s, 20px); // Smooth entrance animation
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--spacing-xs);
+  }
+}

@@ -1,0 +1,29 @@
+// _variables.scss
+:root {
+  /* Colors */
+  --primary-color: #ffffff;
+  --secondary-color: rgba(255, 255, 255, 0.12);
+  --accent-color: #00bcd4;
+  --dark-color: #111827;
+  --light-color: #f3f4f6;
+  --glass-bg-color: rgba(0, 0, 0, 0.35);
+  --primary-text-color: #e5e7eb;
+  --secondary-text-color: rgba(229, 231, 235, 0.85);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --shadow-color: rgba(0, 0, 0, 0.4);
+
+  /* Fonts */
+  --main-font: 'Poppins', sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 6px;
+  --spacing-sm: 12px;
+  --spacing-md: 20px;
+  --spacing-lg: 32px;
+  --spacing-xl: 64px;
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+}

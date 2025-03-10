@@ -1,0 +1,102 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.contact-section {
+  @include glass-card;
+  max-width: 650px;
+  margin: var(--spacing-lg) auto;
+  padding: var(--spacing-md);
+  text-align: center;
+  color: var(--secondary-text-color);
+  backdrop-filter: blur(15px);
+  @include fade-slide-up(0.6s, 20px);
+
+  h2 {
+    @include responsive-text(1.8rem, 3rem);
+    margin-bottom: var(--spacing-md);
+    @include gradient-text(var(--primary-color), var(--accent-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.5;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: center;
+
+    .contact-link {
+      @include flex-center;
+      gap: var(--spacing-sm);
+      text-decoration: none;
+      color: var(--primary-text-color);
+      font-size: 1rem;
+      padding: var(--spacing-xs) var(--spacing-md);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+      width: 100%;
+      max-width: 400px;
+      justify-content: flex-start;
+
+      .icon {
+        font-size: 1.4rem;
+        color: var(--accent-color);
+        min-width: 1.4rem;
+      }
+
+      &:hover {
+        background: var(--accent-color);
+        color: var(--dark-color);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 16px var(--shadow-color);
+
+        .icon {
+          color: var(--dark-color);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm);
+
+    h2 {
+      font-size: 2.2rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+
+    .contact-details .contact-link {
+      font-size: 0.95rem;
+      padding: var(--spacing-xs) var(--spacing-sm);
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--spacing-xs);
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+
+    .contact-details .contact-link {
+      font-size: 0.9rem;
+      padding: var(--spacing-xs);
+    }
+  }
+}

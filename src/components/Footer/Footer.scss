@@ -1,0 +1,107 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.footer {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--secondary-text-color);
+  margin-top: auto;
+  position: relative;
+  z-index: 10;
+
+  .footer-content {
+    @include flex-center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 var(--spacing-sm);
+
+    p {
+      font-size: 0.95rem;
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: var(--spacing-md);
+      position: relative;
+
+      a {
+        color: var(--secondary-text-color);
+        font-size: 1.6rem;
+        transition: color 0.3s ease, transform 0.3s ease;
+        position: relative;
+
+        &:hover {
+          color: var(--accent-color);
+          transform: translateY(-3px);
+        }
+
+        // Accessible Tooltip
+        &::after {
+          content: attr(aria-label);
+          position: absolute;
+          bottom: calc(100% + 8px);
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(0, 0, 0, 0.85);
+          color: var(--primary-text-color);
+          padding: 4px 8px;
+          border-radius: var(--radius-sm);
+          font-size: 0.7rem;
+          white-space: nowrap;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+        }
+
+        &:hover::after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  // Tablet responsiveness
+  @media (max-width: 768px) {
+    padding: var(--spacing-md);
+
+    .footer-content {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      text-align: center;
+
+      p {
+        font-size: 0.85rem;
+        white-space: normal;
+      }
+
+      .social-icons {
+        margin-top: var(--spacing-xs);
+        gap: var(--spacing-sm);
+      }
+    }
+  }
+
+  // Mobile responsiveness
+  @media (max-width: 480px) {
+    padding: var(--spacing-sm);
+
+    .footer-content {
+      gap: var(--spacing-xs);
+    }
+
+    p {
+      font-size: 0.8rem;
+    }
+
+    .social-icons a {
+      font-size: 1.4rem;
+    }
+  }
+}
