@@ -14,7 +14,7 @@ import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 // Constants
 const GITHUB_USERNAME = 'girish-kor';
 const PER_PAGE = 20;
-const GITHUB_TOKEN = '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'; // Use securely in real apps!
+const GITHUB_TOKEN = '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'; // Use securely in real apps!
 const COLORS = [
   'rgba(0, 196, 159, 0.5)', // Glassy Teal
   'rgba(255, 187, 40, 0.5)', // Glassy Yellow
