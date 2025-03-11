@@ -14,7 +14,7 @@ import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 // Constants
 const GITHUB_USERNAME = 'girish-kor';
 const PER_PAGE = 20;
-const GITHUB_TOKEN = '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'; // Token for authentication (ensure to use securely)
+const GITHUB_TOKEN = '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'; // Make sure this is kept secure!
 const COLORS = [
   'rgba(0, 196, 159, 0.5)', // Glassy Teal
   'rgba(255, 187, 40, 0.5)', // Glassy Yellow
@@ -45,9 +45,13 @@ const Project = () => {
       const res = await axiosInstance.get(
         `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=${PER_PAGE}&sort=pushed`
       );
+
+      // Check the rate limit remaining from the response headers
+      console.log('Rate Limit Remaining:', res.headers['x-ratelimit-remaining']);
+      
       setRepos(res.data);
     } catch (err) {
-      console.error('Error fetching repositories:', err);
+      console.error('Error fetching repositories:', err.response || err);
       setError('Failed to fetch repositories. Check API limits or token.');
     } finally {
       setLoading(false);
@@ -60,12 +64,16 @@ const Project = () => {
       const res = await axiosInstance.get(
         `https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/languages`
       );
+      
+      // Log the languages data for debugging
+      console.log('Fetched Languages for', repoName, res.data);
+
       setLanguagesData((prev) => ({
         ...prev,
         [repoName]: res.data,
       }));
     } catch (err) {
-      console.error(`Error fetching languages for ${repoName}:`, err);
+      console.error(`Error fetching languages for ${repoName}:`, err.response || err);
     }
   };
 
