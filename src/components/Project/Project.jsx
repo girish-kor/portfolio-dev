@@ -7,78 +7,148 @@ import {
   FaCodeBranch,
   FaStar,
   FaExclamationCircle,
-  FaCircle,
-  FaClock,
+  FaEye,
 } from 'react-icons/fa';
+import { PieChart, Pie, Cell, Tooltip } from 'recharts';
+
+// Constants
+const GITHUB_USERNAME = 'girish-kor';
+const PER_PAGE = 20;
+const GITHUB_TOKEN = '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'; // Use securely in real apps!
+const COLORS = [
+  'rgba(0, 196, 159, 0.5)', // Glassy Teal
+  'rgba(255, 187, 40, 0.5)', // Glassy Yellow
+  'rgba(255, 68, 68, 0.5)', // Glassy Red
+  'rgba(170, 102, 204, 0.5)', // Glassy Purple
+  'rgba(0, 136, 254, 0.5)', // Glassy Blue
+  'rgba(255, 128, 66, 0.5)', // Glassy Orange
+];
+
+// Axios instance with Authorization
+const axiosInstance = axios.create({
+  headers: {
+    Authorization: `token ${GITHUB_TOKEN}`,
+  },
+});
 
 const Project = () => {
-  const [repoData, setRepoData] = useState({});
+  const [repos, setRepos] = useState([]);
+  const [languagesData, setLanguagesData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  const projects = [
-    {
-      title: 'Web-Shop',
-      description:
-        'A responsive e-commerce platform with modern UI, backend integration, and seamless user experience.',
-      link: 'https://web-shop-hu5w.onrender.com/',
-      github: 'https://github.com/girish-kor/web-shop',
-      repo: 'girish-kor/web-shop',
-    },
-  ];
+  // Fetch Repositories with Authorization
+  const fetchRepos = async () => {
+    setLoading(true);
+    try {
+      const res = await axiosInstance.get(
+        `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=${PER_PAGE}&sort=pushed`
+      );
+      setRepos(res.data);
+    } catch (err) {
+      setError('Failed to fetch repositories. Check API limits or token.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch Languages for each Repo with Authorization
+  const fetchLanguages = async (repoName) => {
+    try {
+      const res = await axiosInstance.get(
+        `https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/languages`
+      );
+      setLanguagesData((prev) => ({
+        ...prev,
+        [repoName]: res.data,
+      }));
+    } catch (err) {
+      console.error(`Error fetching languages for ${repoName}:`, err);
+    }
+  };
+
+  // Load Repositories and their Languages
+  useEffect(() => {
+    fetchRepos();
+  }, []);
 
   useEffect(() => {
-    const fetchRepoData = async () => {
-      const data = {};
-      await Promise.all(
-        projects.map(async (project) => {
-          try {
-            const res = await axios.get(`https://api.github.com/repos/${project.repo}`);
-            data[project.repo] = res.data;
-          } catch (error) {
-            console.error(`Error fetching data for ${project.repo}:`, error);
-          }
-        })
-      );
-      setRepoData(data);
-    };
+    repos.forEach((repo) => fetchLanguages(repo.name));
+  }, [repos]);
 
-    fetchRepoData();
-  }, []);
+  // Convert language data to percentages
+  const getLanguagePercentages = (languages) => {
+    const total = Object.values(languages).reduce((sum, bytes) => sum + bytes, 0);
+    return Object.entries(languages).map(([lang, bytes]) => ({
+      name: lang,
+      value: Number(((bytes / total) * 100).toFixed(2)),
+    }));
+  };
 
   return (
     <section className="project-section" id="projects">
-      <h2>Featured Projects</h2>
-      <div className="projects-grid">
-        {projects.map((project, index) => {
-          const repo = repoData[project.repo] || {};
-          return (
-            <div className="project-card" key={index}>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
+      <h2>🚀 My Projects</h2>
 
+      {error && <p className="error">{error}</p>}
+      {loading && <p>Loading projects...</p>}
+
+      <div className="projects-grid">
+        {repos.map((repo) => {
+          const languageData = languagesData[repo.name];
+          const pieData = languageData ? getLanguagePercentages(languageData) : [];
+
+          return (
+            <div className="project-card" key={repo.id}>
+              <h3>{repo.name}</h3>
+              <p>{repo.description || 'No description available.'}</p>
+
+              {pieData.length > 0 && (
+                <div className="responsive-pie-chart">
+                  <PieChart width={320} height={180}>
+                    <Pie
+                      data={pieData}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="50%"
+                      outerRadius="60%"
+                      label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                      stroke="black"
+                      strokeWidth={1}
+                    >
+                      {pieData.map((_, idx) => (
+                        <Cell key={`cell-${idx}`} fill={COLORS[idx % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                  </PieChart>
+                </div>
+              )}
+
+              {/* Repo Stats */}
               <div className="repo-stats">
                 <span>
-                  <FaStar /> {repo.stargazers_count || '0'}
+                  <FaStar /> {repo.stargazers_count}
                 </span>
                 <span>
-                  <FaCodeBranch /> {repo.forks_count || '0'}
+                  <FaCodeBranch /> {repo.forks_count}
                 </span>
                 <span>
-                  <FaExclamationCircle /> {repo.open_issues_count || '0'}
+                  <FaExclamationCircle /> {repo.open_issues_count}
                 </span>
                 <span>
-                  <FaCircle /> {repo.language || 'N/A'}
-                </span>
-                <span>
-                  <FaClock />{' '}
-                  {repo.updated_at ? new Date(repo.updated_at).toLocaleDateString() : 'N/A'}
+                  <FaEye /> {repo.watchers_count}
                 </span>
               </div>
 
+              {/* Repo Links */}
               <div className="project-links">
-                <a href={project.link} target="_blank" rel="noopener noreferrer">
-                  <FaExternalLinkAlt /> Live Demo
-                </a>
-                <a href={project.github} target="_blank" rel="noopener noreferrer">
+                {repo.homepage && (
+                  <a href={repo.homepage} target="_blank" rel="noopener noreferrer">
+                    <FaExternalLinkAlt /> Live Demo
+                  </a>
+                )}
+                <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
                   <FaGithub /> Source Code
                 </a>
               </div>
