@@ -1,9 +1,9 @@
 {
-  "name": "github-portfolio",
+  "name": "portfolio-dev",
   "version": "0.1.0",
   "private": true,
   "description": "A React-based portfolio showcasing skills and projects.",
-  "author": "Developer",
+  "author": "Girish Kor",
   "license": "ISC",
   "homepage": "",
   "repository": {
