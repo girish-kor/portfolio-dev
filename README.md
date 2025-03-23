@@ -24,7 +24,7 @@ A React-based portfolio showcasing skills, projects, and GitHub repositories dyn
 ## 📂 Project Structure
 
 ```
-react-portfolio/
+portfolio-dev-main/
 ├── public/
 ├── src/
 │   ├── assets/
@@ -47,8 +47,8 @@ react-portfolio/
 ## 📦 Installation
 
 ```sh
-git clone https://github.com/girish-kor/github-portfolio.git
-cd react-portfolio
+git clone https://github.com/girish-kor/portfolio-dev.git
+cd portfolio-dev
 npm install
 ```
 
