@@ -1,0 +1,9 @@
+// main.scss - Import all partials
+@use 'variables';
+@use 'mixins';
+@use 'global';
+@use 'pages/projects';
+@use 'pages/about';
+@use 'pages/contact';
+@use 'components/header';
+@use 'components/footer';

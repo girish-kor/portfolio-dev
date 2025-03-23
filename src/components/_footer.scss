@@ -1,0 +1,15 @@
+@use '../variables' as v;
+@use '../mixins' as m;
+
+.footer {
+  @include m.glassmorphism;
+  padding: v.$spacing-lg;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: v.$font-size-md;
+  background: var(--bg);
+  color: var(--text);
+  text-align: center;
+}

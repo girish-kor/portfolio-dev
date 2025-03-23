@@ -1,0 +1,78 @@
+// _mixins.scss
+@use 'variables' as v;
+
+// Reusable design patterns
+@mixin glassmorphism {
+  background: rgba(26, 26, 26, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: v.$border-radius-lg;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin hover-scale($scale: 1.07) {
+  transition: transform 0.25s ease-in-out;
+  will-change: transform;
+
+  &:hover {
+    transform: scale($scale);
+  }
+}
+
+@mixin hover-elevate($y: -6px) {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform, box-shadow;
+
+  &:hover {
+    transform: translateY($y);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  }
+}
+
+
+@mixin button-base {
+  padding: v.$spacing-sm v.$spacing-lg;
+  font-size: v.$font-size-md;
+  border: none;
+  border-radius: v.$border-radius-md;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  outline: none;
+  user-select: none;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: v.$breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (max-width: v.$breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (max-width: v.$breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (max-width: v.$breakpoint-xl) { @content; }
+  }
+}
+
+@mixin fade-in($duration: 1s) {
+  animation: fadein $duration;
+  
+  @keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}

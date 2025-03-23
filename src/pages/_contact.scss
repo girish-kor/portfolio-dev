@@ -1,0 +1,50 @@
+@use '../variables' as v;
+@use '../mixins' as m;
+
+.contact-section {
+  text-align: center;
+
+  .glass-card {
+    @include m.glassmorphism;
+    background: var(--bg);
+    padding: v.$spacing-xl;
+    color: #fff;
+    display: grid;
+    gap: v.$spacing-lg;
+    max-width: 500px;
+    margin: 0 auto;
+
+    @include m.responsive(md) {
+      max-width: 90%;
+    }
+  }
+
+  .contact-item {
+    @include m.flex-center;
+    gap: v.$spacing-md;
+    padding: v.$spacing-md;
+    transition: background 0.2s;
+
+    &.clickable {
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    &.button {
+      background: var(--secondary);
+      border-radius: v.$border-radius-md;
+      justify-content: center;
+      transition: transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+
+      &:hover {
+        transform: translateY(-3px);
+      }
+    }
+  }
+}

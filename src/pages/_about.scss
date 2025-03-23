@@ -1,0 +1,71 @@
+@use '../variables' as v;
+@use '../mixins' as m;
+
+.about-section {
+  @include m.flex-column;
+  align-items: center;
+  gap: v.$spacing-xl;
+  padding: v.$spacing-xxxl v.$spacing-md;
+  text-align: center;
+
+  .glass-card {
+    @include m.glassmorphism;
+    background: var(--bg);
+    padding: v.$spacing-xl;
+    @include m.hover-elevate;
+    width: 100%;
+  }
+
+  h2 {
+    color: var(--primary);
+    margin-bottom: v.$spacing-md;
+  }
+
+  .readme-content {
+    font-size: v.$font-size-md;
+    line-height: 1.6;
+    color: var(--text);
+    text-align: justify;
+    padding: v.$spacing-md;
+    border-left: 4px solid var(--primary);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: v.$border-radius-md;
+
+    @include m.responsive(md) {
+      text-align: left;
+    }
+  }
+
+  .badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: v.$spacing-sm;
+    margin-top: v.$spacing-md;
+
+    h2 {
+      width: 100%;
+      text-align: center;
+      margin-bottom: v.$spacing-sm;
+    }
+    a{
+      color: var(--primary);
+    }
+
+    .badge {
+      padding: v.$spacing-xs v.$spacing-md;
+      border-radius: v.$border-radius-xl;
+      font-size: v.$font-size-sm;
+      font-weight: bold;
+      @include m.hover-scale(1.1);
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: var(--primary);
+    }
+
+    .tech-skill {
+      background: var(--accent);
+      color: #fff;
+    }
+  }
+}

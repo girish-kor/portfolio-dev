@@ -1,0 +1,87 @@
+// _global.scss
+@use 'variables' as v;
+@use 'mixins' as m;
+
+* {
+  padding: 0;
+  margin: 0;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: rgba(20, 20, 40, 0.9);
+  --text: #b0c4de;
+  --primary: rgb(30, 144, 255);
+  --secondary: rgba(70, 130, 180, 0.3);
+  --accent: rgba(135, 206, 250, 0.2);
+}
+
+
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('/assets/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+  @include m.flex-column;
+  padding-bottom: v.$spacing-xl;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  min-height: 100vh !important;
+}
+
+.app {
+  max-width: 100%;
+  width: 100%;
+  // padding: v.$spacing-xl;
+  flex: 1;
+  
+  @include m.responsive(md) {
+    padding: v.$spacing-md;
+  }
+}
+
+.glass-card {
+  @include m.glassmorphism;
+  background: var(--bg);
+  padding: v.$spacing-xl;
+  transition: transform 0.3s, box-shadow 0.3s;
+  
+  @include m.responsive(md) {
+    padding: v.$spacing-lg;
+  }
+}
+
+// Buttons
+.button {
+  @include m.button-base;
+  
+  @include m.responsive(md) {
+    padding: v.$spacing-xs v.$spacing-md;
+  }
+  
+  &-primary {
+    background: var(--primary);
+    color: #fff;
+  }
+  
+  &-secondary {
+    background: var(--secondary);
+    color: #fff;
+  }
+  
+  &-accent {
+    background: var(--accent);
+    color: #fff;
+  }
+  
+  &-disabled {
+    background: gray;
+    color: white;
+    cursor: not-allowed;
+  }
+}

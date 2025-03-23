@@ -1,0 +1,107 @@
+@use '../variables' as v;
+@use '../mixins' as m;
+
+.projects-section {
+  overflow: hidden;
+  padding: v.$spacing-xl 0;
+  max-width: 100%;
+}
+
+.projects-scroller {
+  display: flex;
+  gap: v.$spacing-md;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include m.responsive(md) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.project-card {
+  @include m.glassmorphism;
+  background: var(--bg);
+  min-width: 350px;
+  min-height: 400px;
+  margin: v.$spacing-md;
+  padding: v.$spacing-lg;
+  @include m.flex-column;
+  align-items: center;
+  text-align: center;
+  @include m.hover-scale;
+
+  @include m.responsive(md) {
+    min-width: 280px;
+    width: 90%;
+    margin: v.$spacing-md auto;
+  }
+
+  h3 {
+    color: #fff;
+    font-size: v.$font-size-lg;
+    font-weight: bold;
+    margin-bottom: v.$spacing-xs;
+  }
+
+  .repo-description {
+    font-size: v.$font-size-sm;
+    color: var(--text);
+    opacity: 0.8;
+    min-height: 50px;
+  }
+
+  .buttons {
+    @include m.flex-center;
+    gap: v.$spacing-md;
+    margin: v.$spacing-md 0;
+  }
+
+  .button {
+    padding: v.$spacing-xs v.$spacing-md;
+    font-weight: bold;
+    border-radius: v.$border-radius-sm;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .button-primary {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .button-accent {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .button-disabled {
+    background: var(--text);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .pie-chart-container {
+    width: 200px;
+    height: 200px;
+    @include m.flex-center;
+    margin-top: v.$spacing-md;
+
+    @include m.responsive(md) {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .no-data {
+    font-size: v.$font-size-sm;
+    color: var(--text);
+    opacity: 0.7;
+  }
+}
