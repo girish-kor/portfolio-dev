@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import ContentNav from './components/ContentNav';
-import Footer from './components/Footer';
 import Header from './components/Header';
 import './main.scss';
 import About from './pages/About';
@@ -61,7 +60,6 @@ export default function App() {
         {activeSection === 'projects' && <Projects repos={repos} />}
         {activeSection === 'contact' && <Contact user={userData} />}
       </main>
-      <Footer user={userData} />
     </div>
   );
 }
