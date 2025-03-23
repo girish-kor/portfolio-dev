@@ -72,7 +72,3 @@ This project is licensed under the **ISC License**.
 ## 📬 Contact
 
 For issues or feedback, open an issue at [GitHub Issues](https://github.com/giris-hkor/portfolio-dev/issues).
-# github-portfolio
-"# github-portfolio" 
-# portfolio-dev
-# portfolio-dev
